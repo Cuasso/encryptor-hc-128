@@ -1,0 +1,9 @@
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\bin\Debug\encryptor-hc-128.exe.config
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\bin\Debug\encryptor-hc-128.exe
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\bin\Debug\encryptor-hc-128.pdb
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor_hc_128.Properties.Resources.resources
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.csproj.GenerateResource.cache
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.csproj.CoreCompileInputs.cache
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.exe
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.pdb
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor_hc_128.CryptoMain.resources
