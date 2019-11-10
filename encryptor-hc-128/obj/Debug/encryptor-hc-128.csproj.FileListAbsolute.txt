@@ -7,3 +7,7 @@ D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.csproj
 D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.exe
 D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.pdb
 D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor_hc_128.CryptoMain.resources
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.csprojAssemblyReference.cache
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\bin\Debug\application.dll
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\bin\Debug\application.pdb
+D:\Proyectos\encryptor-hc-128\encryptor-hc-128\obj\Debug\encryptor-hc-128.csproj.CopyComplete
