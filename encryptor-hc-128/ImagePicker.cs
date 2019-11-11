@@ -40,25 +40,38 @@ namespace encryptor_hc_128
 
         private void BtCrypto_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(pbImage.ImageLocation))
+            if (ValidateKey())
             {
-                var bitmap = new Bitmap(pbImage.ImageLocation);
-                var textImage = ImageToByteArray(bitmap);
-                var data = EncryptDecrypt(textImage);
-                
-                try
+                if (!string.IsNullOrEmpty(pbImage.ImageLocation))
                 {
-                    File.WriteAllBytes($"{GetPath(pbImage.ImageLocation)}encrypted.png", data);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                    var bitmap = new Bitmap(pbImage.ImageLocation);
+                    var textImage = ImageToByteArray(bitmap);
+                    var data = EncryptDecrypt(textImage);
 
-            } else
-            {
-                MessageBox.Show("Debe seleccionar una imagen primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        File.WriteAllBytes($"{GetPath(pbImage.ImageLocation)}encrypted.png", data);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ocurrio un error", MessageBoxButtons.OK);
+                        Console.WriteLine(ex.Message);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una imagen primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+        }
+
+        private bool ValidateKey()
+        {
+            if (txtBoxKey.Text.Length == 16) return true;
+
+            MessageBox.Show("Debe Ingresar una contraseña de 16 caracteres", "Contraseña invalida", MessageBoxButtons.OK);
+            return false;
         }
 
         private void BtTextFile_Click(object sender, EventArgs e)
@@ -76,33 +89,38 @@ namespace encryptor_hc_128
 
         private void BtDecrypt_Click(object sender, EventArgs e)
         {
-
-            if (!string.IsNullOrEmpty(pbImage.ImageLocation))
+            if (ValidateKey())
             {
-                var bytes = File.ReadAllBytes(pbImage.ImageLocation);
-                var imageBytes = EncryptDecrypt(bytes);              
-                try
+                if (!string.IsNullOrEmpty(pbImage.ImageLocation))
                 {
-                    var image = ByteArrayToImage(imageBytes);
-                    var path = GetPath(pbImage.ImageLocation).Replace("encrypted", "");
-                    image.Save($"{path}.png", ImageFormat.Png);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                    var bytes = File.ReadAllBytes(pbImage.ImageLocation);
+                    var imageBytes = EncryptDecrypt(bytes);
+                    try
+                    {
+                        //var image = ByteArrayToImage(imageBytes);
+                        var path = GetPath(pbImage.ImageLocation).Replace("encrypted", "");
+                        //image.Save($"{path}.png", ImageFormat.Png);
+                        File.WriteAllBytes($"{path}.png", imageBytes);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ocurrio un error", MessageBoxButtons.OK);
+                        Console.WriteLine(ex.Message);
+                    }
 
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una imagen primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
-            {
-                MessageBox.Show("Debe seleccionar una imagen primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
         }
 
         #region Helpers functions
         private byte[] EncryptDecrypt(byte[] imageByteArray)
         {
-            var key = Encoding.ASCII.GetBytes("pomarputo1111111");
+            var key = Encoding.ASCII.GetBytes(txtBoxKey.Text);
             var iv = Encoding.ASCII.GetBytes("1234123412341234");
             var encryptor = new EncriptorHC128(key,iv);
             return encryptor.EncryptDecrypt(imageByteArray);
