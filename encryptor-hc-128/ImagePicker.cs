@@ -29,7 +29,7 @@ namespace encryptor_hc_128
                 {
                     var imageLocation = dialog.FileName;
                     pbImage.ImageLocation = imageLocation;
-                    btCrypto.Enabled = true;
+                    btDecrypt.Enabled = btCrypto.Enabled = true;
                 }
             }
             catch (Exception)
@@ -43,13 +43,12 @@ namespace encryptor_hc_128
             if (!string.IsNullOrEmpty(pbImage.ImageLocation))
             {
                 var bitmap = new Bitmap(pbImage.ImageLocation);
-                var textImage = ImageToString(bitmap);
-                var data = EncryptDecrypt(Encoding.ASCII.GetBytes(textImage));
-                var text = Convert.ToBase64String(data);
+                var textImage = ImageToByteArray(bitmap);
+                var data = EncryptDecrypt(textImage);
+                
                 try
                 {
-                    
-                    File.WriteAllText($"{GetPath(pbImage.ImageLocation)}.txt", text);
+                    File.WriteAllBytes($"{GetPath(pbImage.ImageLocation)}encrypted.png", data);
                 }
                 catch (Exception ex)
                 {
@@ -77,13 +76,28 @@ namespace encryptor_hc_128
 
         private void BtDecrypt_Click(object sender, EventArgs e)
         {
-            var text = File.ReadAllText(_textFilePath);
-            var textImage = Encoding.ASCII.GetString(EncryptDecrypt(Convert.FromBase64String(text)));
-            var image = StringToImage(textImage);
-            image.Save($"{GetPath(_textFilePath)}.png", ImageFormat.Png);
+
+            if (!string.IsNullOrEmpty(pbImage.ImageLocation))
+            {
+                var bytes = File.ReadAllBytes(pbImage.ImageLocation);
+                var imageBytes = EncryptDecrypt(bytes);              
+                try
+                {
+                    var image = ByteArrayToImage(imageBytes);
+                    var path = GetPath(pbImage.ImageLocation).Replace("encrypted", "");
+                    image.Save($"{path}.png", ImageFormat.Png);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una imagen primero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
-
 
         #region Helpers functions
         private byte[] EncryptDecrypt(byte[] imageByteArray)
@@ -94,27 +108,23 @@ namespace encryptor_hc_128
             return encryptor.EncryptDecrypt(imageByteArray);
         }
 
-        public string ImageToString(Image image)
+        public byte[] ImageToByteArray(Image image)
         {
             using (MemoryStream m = new MemoryStream())
             {
                 image.Save(m, image.RawFormat);
                 byte[] imageBytes = m.ToArray();
-
-                // Convert byte[] to Base64 String
-                string base64String = Convert.ToBase64String(imageBytes);
-                return base64String;
+                return imageBytes;
             }
         }
 
-        public Image StringToImage(string base64String)
+        public Image ByteArrayToImage(byte[] imageByte)
         {
-            byte[] imageBytes = Convert.FromBase64String(base64String);
-            MemoryStream ms = new MemoryStream(imageBytes, 0,
-              imageBytes.Length);
+            MemoryStream ms = new MemoryStream(imageByte, 0,
+              imageByte.Length);
 
             // Convert byte[] to Image
-            ms.Write(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageByte, 0, imageByte.Length);
             Image image = Image.FromStream(ms, true);
             return image;
         }

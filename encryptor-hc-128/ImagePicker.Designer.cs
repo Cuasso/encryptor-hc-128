@@ -38,8 +38,6 @@
             this.btCrypto = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btDecrypt = new System.Windows.Forms.Button();
-            this.btTextFile = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblTextFile = new System.Windows.Forms.Label();
             this.SidePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
@@ -80,10 +78,9 @@
             this.lbMessage.ForeColor = System.Drawing.Color.White;
             this.lbMessage.Location = new System.Drawing.Point(226, 27);
             this.lbMessage.Name = "lbMessage";
-            this.lbMessage.Size = new System.Drawing.Size(259, 18);
+            this.lbMessage.Size = new System.Drawing.Size(352, 18);
             this.lbMessage.TabIndex = 1;
-            this.lbMessage.Text = "Seleccione una imagen para encriptar.";
-            // 
+            this.lbMessage.Text = "Seleccione una imagen para encriptar / desencriptar.";
             // btImageUpload
             // 
             this.btImageUpload.BackColor = System.Drawing.Color.Maroon;
@@ -102,7 +99,7 @@
             // 
             this.pbImage.Location = new System.Drawing.Point(387, 73);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(269, 154);
+            this.pbImage.Size = new System.Drawing.Size(297, 176);
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 3;
             this.pbImage.TabStop = false;
@@ -130,42 +127,18 @@
             // btDecrypt
             // 
             this.btDecrypt.AllowDrop = true;
+            this.btCrypto.Enabled = false;
             this.btDecrypt.BackColor = System.Drawing.Color.Maroon;
             this.btDecrypt.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.btDecrypt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btDecrypt.ForeColor = System.Drawing.Color.Transparent;
-            this.btDecrypt.Location = new System.Drawing.Point(229, 372);
+            this.btDecrypt.Location = new System.Drawing.Point(229, 205);
             this.btDecrypt.Name = "btDecrypt";
             this.btDecrypt.Size = new System.Drawing.Size(104, 44);
             this.btDecrypt.TabIndex = 6;
             this.btDecrypt.Text = "Desencriptar";
             this.btDecrypt.UseVisualStyleBackColor = false;
             this.btDecrypt.Click += new System.EventHandler(this.BtDecrypt_Click);
-            // 
-            // btTextFile
-            // 
-            this.btTextFile.BackColor = System.Drawing.Color.Maroon;
-            this.btTextFile.Cursor = System.Windows.Forms.Cursors.AppStarting;
-            this.btTextFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btTextFile.ForeColor = System.Drawing.Color.Transparent;
-            this.btTextFile.Location = new System.Drawing.Point(229, 308);
-            this.btTextFile.Name = "btTextFile";
-            this.btTextFile.Size = new System.Drawing.Size(104, 44);
-            this.btTextFile.TabIndex = 7;
-            this.btTextFile.Text = "Cargar Texto";
-            this.btTextFile.UseVisualStyleBackColor = false;
-            this.btTextFile.Click += new System.EventHandler(this.BtTextFile_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(226, 272);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(331, 18);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Seleccione un archivo de texto para desencriptar.";
             // 
             // lblTextFile
             // 
@@ -184,8 +157,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblTextFile);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btTextFile);
             this.Controls.Add(this.btDecrypt);
             this.Controls.Add(this.btCrypto);
             this.Controls.Add(this.pbImage);
@@ -213,8 +184,6 @@
         private System.Windows.Forms.Button btCrypto;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btDecrypt;
-        private System.Windows.Forms.Button btTextFile;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblTextFile;
     }
 }
